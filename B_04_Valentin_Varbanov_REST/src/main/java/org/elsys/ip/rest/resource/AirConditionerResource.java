@@ -42,13 +42,13 @@ public class AirConditionerResource {
 
     @GET
     @Produces("application/json")
+    @Path("multiple")
     public List<AirConditioner> getByMultipleIds(@QueryParam("id") final List<Integer> listOfIds) {
         return airConditionerService.getByMultipleIds(new HashSet<>(listOfIds));
     }
 
     @GET
     @Produces("application/json")
-    @Path("byFields")
     public List<AirConditioner> getByMultipleFields(
             @Context UriInfo uriInfo
     ) {
@@ -59,7 +59,7 @@ public class AirConditionerResource {
     @POST
     @Consumes("application/json")
     @Produces("application/json")
-    @Path("multiple")
+    @Path("createMultiple")
     public List<AirConditioner> bulkCreateAirConditioners(List<AirConditioner> airConditioners) {
 
         airConditionerService.addList(airConditioners);
@@ -101,9 +101,9 @@ public class AirConditionerResource {
     /**
      * Updates (in this case replaces) AirConditioner object with the given ID with the one in the parameters list.
      *
-     * @param id
-     * @param airConditioner
-     * @return
+     * @param id - id
+     * @param airConditioner - JSON object with id and name - the fields of AirConditioner
+     * @return the updated object
      */
     @PUT
     @Path("{id}")
@@ -116,7 +116,7 @@ public class AirConditionerResource {
     /**
      * Deletes AirConditioner with the given ID
      *
-     * @param id
+     * @param id - id
      */
     @DELETE
     @Path("{id}")
